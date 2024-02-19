@@ -1,0 +1,14 @@
+1. Block:
+    - Behavior: Block-level elements always start on a new line and take up the full width available (stretches out to the left and right as far as it can).
+    - Examples: <div>, <p>, <h1> to <h6>, and <section> are block elements by default.
+    - Use Case: Suitable for creating sections or divisions within a page, like paragraphs, headings, and containers that need to occupy their own vertical space.
+
+2. Inline:
+    - Behavior: Inline elements do not start on a new line and only take up as much width as necessary. This property allows elements to sit next to each other on the same line.
+    - Examples: <span>, <a>, <img>, and <strong> are inline elements by default.
+    - Use Case: Ideal for styling text or wrapping small elements without breaking the flow of content, such as links within a paragraph or bold/italicized text.
+
+3. Inline-Block:
+    - Behavior: Combines features of both block and inline. Inline-block elements sit on the same line as adjacent content but can have width and height values set, which is not possible with purely inline elements.
+    - Examples: Not assigned to HTML elements by default but can be applied via CSS.
+    - Use Case: Useful for creating a layout of horizontally aligned elements that also need to have their dimensions specified, like a navigation menu where each item needs specific spacing.
