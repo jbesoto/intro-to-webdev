@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Positioning Basics</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <!-- 
+            <style>
+                This overrides linked style sheet
+            </style> 
+        -->
+    </head>
+    <body>
+        <header>
+            <h1>Navigation could live here?</h1>
+        </header>
+        <!-- This is just a box -->
+        <div class="abs-no-parent">
+            <p>This div has not parent, absolutely positioned</p>
+        </div> 
+        <div class="rel-parent">
+            <p>This div is not a parent, and is absolutely positioned</p>
+            <div class="abs-rel-parent">
+                <p>
+                    This div is absolutely positoned inside of a relatively
+                    positioned parent
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+<!--
+    - Divs have not style at first, they will take up as much space as they need to
+    - What is abs-no-parent, rel-parent, abs-rel-parent?
+ -->

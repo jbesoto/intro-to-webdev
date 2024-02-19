@@ -1,0 +1,164 @@
+/* Global Styles 
+    - Text selectors
+    - Resets
+*/
+
+* {
+    /* Always throw in the begginning, makes your life easier */
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+/* Desktop First Styling Approach */
+
+header {
+    /* Flex container, everthing inside will stack next to each other */
+    display: flex;
+    flex-direction: row;
+    /* justify-content -> Very helpful!
+    Space in between items, evenly spaced */
+    justify-content: space-between;
+    /* Think alignment within a cell */
+    align-items: center;
+    background-image: url('../path/to/image');
+    /* 2 * 16px = 2rem */
+    padding: 0 2rem;
+    position: relative;
+}
+
+.brand {
+    margin: 0;
+    font-weight: 300;
+}
+
+header a {
+    color: #AAA;
+    text-decoration: none;
+}
+
+.mobile-menu {
+    /* Hide hamburger menu on desktop */
+    display: none;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /* Make it a container to stack items of menu next to each other */
+    display: flex;
+    flex-direction: row;
+}
+
+.menu li {
+    /* TODO: Why rems? */
+    min-width: 5rem;
+}
+
+.menu li a {
+    /* Chunky button */
+    display: block;
+    padding: 1rem;
+}
+
+.menu li a:hover {
+    color: #EEE;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* Important: tell content withing to wrap in case not enough space */
+    flex-wrap: wrap;
+}
+
+.thumb {
+    /* grow, shrink, percentage of the container to occupy */
+    flex: 0 0 23%;
+    margin: 2rem auto;
+}
+
+/* 
+Media queries: conditional that overrides content depending on resolution.
+NOTE: Order should be from big to small, or viceversa */
+
+/* Tablet Sized Screen */
+/* 1024 x 768 -> iPad resolution */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* 
+    Good way to test if media query is working:
+        body {
+            background-color: blue;
+        } 
+    */
+
+    .thumb {
+        /* Displays bigger images in tablet size */
+        flex: 0 0 45%;
+        margin: 1rem auto;
+    }
+}
+
+/* Mobile Phone Sized Screen */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+        /*  */
+        align-items: stretch;
+        text-align: center;
+        padding: 0;
+    }
+
+    .brand {
+        margin: 0.5rem;
+    }
+
+    .mobile-menu {
+        display: block;
+        color: #AAA;
+        font-size: 2rem;
+        /* Will always stay in one place */
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+    }
+
+    .menu {
+        flex-direction: column;
+    }
+
+    .menu li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .container {
+        /* Turn container into Instagram-like feed */
+        flex-direction: column;
+    }
+
+    /* Typical orverride for flex items on mobile */
+    .thumb {
+        /* flex can_grow can_shrink -> 0 = false, 1 = true */
+        flex: 1 1 100%;
+        margin: 1rem auto;
+    }
+}
+
+/* Responsive emulated unit 
+-> start getting comfortable with rem
+- Why is it useful?
+- 1rem = 16px
+*/

@@ -1,0 +1,66 @@
+html, body { /* This is a group selector, these types get same styles */
+    margin: 0;
+}
+
+div {
+    border: 1px solid red; /* Margins outside the box */
+    padding: 10px; /* Margins inside box */
+}
+
+/*
+Absolute positioned elements without a positioned parent
+will be positoned in relation to the entire browser window
+*/
+.abs-no-parent { /* Classes always start with '.' */
+    background-color: cornflowerblue;
+    position: absolute;  /* What does it mean? Positioned is mantained in
+                            relation to the browswer window
+                         */
+    /* Can use either percentage or pixels */
+    top: 20%;
+    right: 100px;
+}
+
+.rel-parent {
+    background-color: green;
+    width: 50%;
+    /* height: 100%; 
+    This does not take up 100% of the browser window. To
+    override this, use vh (viewport height)
+    */
+    height: 100vh;
+    /* 
+    Whenever you want to position something absolutely
+    inside of another element, the parent element needs
+    to be positioned... [TODO]
+     */
+    position: relative;
+}
+
+.abs-rel-parent {
+    background-color: rgb(12, 237, 16);
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    bottom: 10px;  /* From bottom, 10px up */
+    right: 0;
+}
+
+header {
+    background-color: darkorange;
+    height: 100px;
+    width: 100%;
+    /* What determines ordering of elements? In front, back? */
+    position: fixed;  /* Often used for navbars, 
+                        stays fixed as you scroll */
+    z-index: 100;  /* Think of adjusting z index like adjusting order 
+                      Negative brings it forward, negative brings it
+                      to the back */
+
+    /* IMPORTANT:
+    When doing fixed position, most likely have to use z-index: index
+    For instance, putting text over and image: 
+        image->relative position, text->absolute 
+    */
+}
+
