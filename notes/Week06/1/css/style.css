@@ -1,0 +1,180 @@
+/* 
+NOTE: Import global styles if they are the same for every stylesheet 
+in your program 
+*/
+
+/* Global Styles */
+
+/* QUESTION: What is this for? */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Scale images to fit parent container */
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* Desktop First Styling */
+
+/* Jumbotron */
+/* A div with class 'hero' */
+/* QUESTION: What is the difference with 'div .hero'? */
+div.hero {
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.hero article {
+  position: absolute;
+  bottom: 10%;
+  right: 0; /* stuck to one side */
+  width: 50%;
+  padding: 2%;
+  /* https://cssgradient.io/ */
+  background: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.5) 0%,
+    rgba(255, 0, 0, 0.2) 100%
+  );
+}
+
+button,
+a.info {
+  padding: 10px 20px;
+  border: 2px solid #333;
+  border-radius: 10px; /* Round edges */
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 1s ease;
+  width: 10rem;
+}
+
+button:hover,
+a.info:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: #333;
+  /* 
+    transition: all 1s ease; 
+
+    NOTE: Transition should always be declared in the initial state
+    If declared here, it won't know that something changed
+    */
+}
+
+/* Gallery */
+
+.container {
+  width: 100%;
+  display: flex; /* Flex container */
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.thumbnail {
+  position: relative;
+  /* QUESTION: These are scale factors, not sure when to use them? */
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 30%;
+  /* 
+    flex: 0 0 30%
+    OR width: 30%
+    */
+  overflow: hidden;
+  margin: 24px auto;
+}
+
+/* Prepare image state for applying transformations */
+.thumbnail img {
+  transform: scale(1) rotate(0deg);
+  transition: all 1s ease;
+}
+
+/* IMPORTANT */
+.thumbnail:hover img {
+  transform: scale(1.5) rotate(-20deg);
+}
+
+.mask {
+  position: absolute;
+  /* Trying to cover parent */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 1s ease-in-out;
+}
+
+.mask h2 {
+  margin: 0;
+}
+
+.mask p {
+  font-style: italic;
+}
+
+.thumbnail:hover .mask {
+  opacity: 1;
+}
+
+.thumbnail .mask h2,
+.thumbnail .mask p,
+.thumbnail .mask a {
+    opacity: 0;
+    transform: scale(0);
+    transition: all 1s ease-in-out;
+}
+
+.thumbnail:hover .mask h2,
+.thumbnail:hover .mask p,
+.thumbnail:hover .mask a {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+    .hero article {
+        width: 75%;
+    }
+
+    .thumbnail {
+        /* NOTE: This make any affect if width statement combined */
+        flex-basis: 45%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 12px;
+    }
+
+    .hero article {
+        width: 100%;
+        padding: 24px;
+        bottom: 0;
+    }
+}
