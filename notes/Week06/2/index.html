@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modals</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+  </head>
+  <body>
+    <br />
+    <br />
+    <a href="#info" class="button">Link to Modal 1</a>
+    <a href="#info2" class="button">Link to Modal 2</a>
+
+    <!-- parent/wrapper div receives target ID, and will be our transparent overlay -->
+    <div id="info" class="info-modal">
+      <!-- This child div is the modal box itself -->
+      <div>
+        <!-- Close button, absolutely positioned -->
+        <a href="#close" class="close">X</a>
+        <!-- Other relevant content you might want to add -->
+        <h2>Modal 1</h2>
+        <p>Some content here...</p>
+      </div>
+    </div>
+
+    <div id="info2" class="info-modal">
+      <div>
+        <a href="#close" class="close">X</a>
+        <h2>Modal 2</h2>
+        <p>Some content here...</p>
+      </div>
+    </div>
+  </body>
+</html>

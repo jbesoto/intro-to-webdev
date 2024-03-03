@@ -1,0 +1,74 @@
+a.button {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(72, 72, 72);
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+}
+
+/* Modal Styles */
+.info-modal {
+  /* Stretch background over entire screen */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* Transparent gray background */
+  background-color: rgba(0, 0, 0, 0.3);
+
+  /* IMPORTANT: Make sure modal and its contents show over all other content */
+  z-index: 9999;
+
+  /* STARTING state of modal is hidden */
+  opacity: 0;
+
+  /* ALWAYS define transitions at the starting state */
+  transition: opacity 400ms;
+
+  /* Tunrning off any clickable elements */
+  pointer-events: none;
+
+  /* NOTE: We always define transitions in the starting state */
+}
+
+/* Element with info-modal class becomes target */
+.info-modal:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Direct descendant to info-modal element that is a div */
+.info-modal > div {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  margin: 10% auto; /* auto will try to center it */
+  padding: 2rem;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.close {
+  height: 40px;
+  width: px;
+  background-color: white;
+  color: black;
+
+  /* Position at top-right corner */
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 1s ease;
+
+  border-top-right-radius: 10px;
+}
+
+/* Pseudo-class selector, ':' */
+.close:hover {
+    background-color: black;
+    color: white;
+}

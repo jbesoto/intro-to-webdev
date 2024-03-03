@@ -1,0 +1,23 @@
+IMPORTANCE
+----------
+- Style sheets are applied by order of importance
+	- User-agent, browser-style (e.g. dark-mode), author/inline/external
+
+SPECIFICITY
+-----------
+- Every CSS rule has weight depending on ...
+	- Think hierarchy, the deeper the CSS rule is, the greater the 
+	weight
+- CSS rules are overwritten by others based on specificity, rather 
+  than the order in which they are written in the stylesheet
+- Calculating specificity
+	- Start at 0 add 100 for each ID value, add 10 for each class value
+	  (or pseudo-class or attribute selector), add 1 for each element 
+      selector or pseudo-element.
+
+| Selector Type                      | Example                         | Weight   |
+|------------------------------------|---------------------------------|----------|
+| Inline styles                      | style="color: blue;"            | 1,0,0,0  |
+| IDs                                | #example                        | 0,1,0,0  |
+| Classes, Attributes, Pseudo-classes| .example, [type='text'], :hover | 0,0,1,0  |
+| Elements, Pseudo-elements          | div, ::before                   | 0,0,0,1  |
