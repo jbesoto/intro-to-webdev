@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Event Listeners and Delegation</title>
+    <style type="text/css">
+      img {
+        display: block;
+        width: 800px;
+        height: auto;
+        margin-top: 20px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .active {
+        color: red;
+      }
+    </style>
+
+    <script type="text/javascript">
+      /**
+       * This is a great tool for, say, toggling a dropdown menu
+      */
+
+      // Listening for "DOMContentLoaded", then do callback function
+      document.addEventListener("DOMContentLoaded", function () {
+        // This is an anonymous function
+        // Usually you assign values to event listeners here
+        console.log("Page fully loaded.");
+
+        document
+          .getElementById("hide-btn")
+          .addEventListener("click", toggleVisible);
+
+        document
+          .getElementById("event-h1")
+          .addEventListener("mouseover", function (e) {
+            // Name of the parameter can be arbitrary, often referred as e (for event)
+            // This is an object ...???
+
+            // e.target is the HTML element fetched by ID
+            // classList is an array containing all classes applied to an HTML element
+            e.target.classList.toggle("active");
+          });
+      });
+
+      function toggleVisible() {
+        var peep = document.getElementById("chicken");
+        peep.classList.toggle('hidden');
+        
+        var btn = document.getElementById("hide-btn");
+        if (peep.classList.contains("hidden")) {
+          btn.innerHTML = "Show";
+        } else {
+          btn.innerHTML = "Hide";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1 id="event-h1">Mouse Over</h1>
+    <button id="hide-btn">Hide</button>
+    <img
+      id="chicken"
+      src="https://ogden_images.s3.amazonaws.com/www.iamcountryside.com/images/sites/3/2021/05/13133128/Coogan-portrait-rir-scaled-e1680549035101.jpg"
+    />
+  </body>
+</html>

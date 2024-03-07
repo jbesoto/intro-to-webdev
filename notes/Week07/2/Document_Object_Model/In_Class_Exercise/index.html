@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dynamic DOM, 2 ways</title>
+    <style type="text/css">
+      #content {
+        color: red;
+      }
+
+      @media screen and (max-width: 767px) {
+        #content {
+          color: blue;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- onclick attribute is not recommended, why? -->
+    <button onclick="addSingleP()">Add Paragraph</button>
+    <!-- Each HTML element is a node in the DOM. This is the proper way of injecting content -->
+    <button onclick="addMultiP(5)">Add Multiple Paragraphs</button>
+    <!-- ID's are the fastest way that JS can grab HTML elements -->
+    <div id="content">
+      <p>Dummy text to be overwritten</p>
+    </div>
+
+    <!-- Putting scripts at the bottom allows HTML to completely load first -->
+    <!-- Also, the script will work globally because it is positioned after the body's content -->
+    <script type="text/javascript">
+      var content;
+      content = document.getElementById("content");
+
+      function addSingleP() {
+        // Do not write HTML in quotes, this is generally bad practice
+        content.innerHTML =
+          "<p>This is a poorly instantiated p tag using string trickery</p>";
+      }
+
+      function addMultiP(num) {
+        for (var i = 0; i < num; i++) {
+          var p = document.createElement("P");
+          var text = document.createTextNode(`Paragraph #${i + 1}`);
+          p.appendChild(text);
+          content.appendChild(p);
+        }
+      }
+    </script>
+  </body>
+</html>
