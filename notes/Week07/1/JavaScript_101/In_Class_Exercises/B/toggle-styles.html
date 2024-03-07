@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toggle Styles</title>
+    <style>
+      .active {
+        background-color: #006fff;
+        color: white;
+        font-size: 60px;
+      }
+    </style>
+    <script type="text/javascript">
+      function toggle() {
+        var item = document.getElementById('change');
+
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
+          item.innerHTML = 'Not active...';
+        } else {
+          item.classList.add('active');
+          item.innerHTML = 'Click Me';
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1 id="change" onclick="toggle()">Click Me</h1>
+  </body>
+</html>
