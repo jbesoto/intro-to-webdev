@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>User Input Simple</title>
+    <style>
+      h1 {
+        text-transform: uppercase;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .green {
+        color: #00ff00;
+      }
+
+      .blue {
+        color: rgba(0, 0, 200, 0.7);
+      }
+
+      .purple {
+        color: rgb(200, 0, 255);
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let btn = document.getElementById("number-btn");
+
+        // TODO: Why is it preferable to use event listener as opposed to onclick?
+        btn.addEventListener("click", changeColorTitle());
+      });
+
+      function changeColorTitle() {
+        var h1 = document.getElementById("title");
+        var colorId = document.getElementById("num");
+        colorId = parseInt(colorId.value);
+
+        switch (colorId) {
+          case 0:
+            h1.className = "red";
+            break;
+          case 1:
+            h1.className = "green";
+            break;
+          case 2:
+            h1.className = "blue";
+            break;
+          case 3:
+            h1.className = "purple";
+            break;
+          default:
+            break;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1 id="title">Get User Input</h1>
+    <form>
+      <fieldset>
+        <legend>Pick a number between 0 and 3</legend>
+        <input type="number" name="num" id="num" min="0" max="3" step="1" />
+        <button type="button" id="number-btn" class="btn">
+          Click to change color of the H1
+        </button>
+      </fieldset>
+    </form>
+  </body>
+</html>

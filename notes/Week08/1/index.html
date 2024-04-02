@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Shuffle</title>
+    <script text="text/javascript">
+      let students = [
+        "Cindy",
+        "Katie",
+        "Albert",
+        "Mike",
+        "Lee",
+        "David",
+        "John",
+        "David",
+        "Camille",
+        "Yin",
+        "Polly",
+      ];
+
+      function list(list) {
+        // store content div
+        let content = document.getElementById("content");
+        // create ordered list
+        let ol = document.createElement("OL");
+        // add it to content div
+        content.appendChild(ol);
+        console.log(content);
+
+        // TODO: Difference between var and let?
+        for (var i = 0; i < list.length; i++) {
+          let li = document.createElement("LI");
+          var studentName = document.createTextNode(list[i]);
+          li.appendChild(studentName);
+          ol.appendChild(li);
+        }
+      }
+
+      function sort(list) {
+        list.sort();
+      }
+
+      function shuffle(list) {
+        for (var i = 0; i < list.length; i++) {
+          let randInd = Math.floor(Math.random() * (list.length - 1));
+          [list[randInd], list[i]] = [list[i], list[randInd]];
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="list()">List Students</button>
+    <button onclick="sort(students)">Sort Student</button>
+    <button onclick="shuffle(students)">Shuffle Students</button>
+    <div id="content"></div>
+  </body>
+</html>

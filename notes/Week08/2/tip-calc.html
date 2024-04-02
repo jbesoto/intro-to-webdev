@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tip Calculator</title>
+    <style type="text/css">
+      .container {
+        width: 300px;
+        margin: 0 auto;
+        /* Aligning items center */
+        line-height: 40px;
+        margin-top: 5%;
+        border: 1px solid grey;
+        border-radius: 10px;
+        padding: 20px;
+      }
+
+      /* Common pattern for these kinds of div */
+      .well {
+        border-radius: 10px;
+        background-color: #ddd;
+        min-height: 100px;
+        padding: 20px;
+      }
+
+      .container button {
+        width: 100%;
+        padding: 10px 0; /* top/bottom left/right */
+        border: 2px solid gray;
+        cursor: pointer;
+        margin: 10px 0;
+        background-color: #666;
+        color: #fff;
+        transition: background-color 1s ease;
+      }
+
+      .container button:hover {
+        background-color: #ccc;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 10px 0;
+        border: 1px solid gray;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 24px;
+      }
+    </style>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("calculate-tip-btn")
+          .addEventListener("click", calculateTotal);
+      });
+
+      function calculateTotal(event) {
+        // 'click' event is passed with all information related to it
+        console.log(event);
+        
+        // Stops the page from refreshing when clicking submit inside the form
+        event.preventDefault();
+        let bill = parseFloat(document.getElementById("bill").value);
+        let tipPercentage = parseFloat(
+          document.querySelector("input[name=tip]:checked").value
+        );
+
+        // Tip rounded to the nearest hundreth
+        let tip = Math.ceil(bill * tipPercentage * 100) / 100;
+        let total = tip + bill;
+        document.getElementById("tip-result").innerHTML = "$" + total;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Tip Calculator</h1>
+      <form>
+        <label for="bill">Enter the value of your bill:</label>
+        <!-- Name aligns with parameters in URL. In this case, `for` and `name` should match -->
+        <input
+          type="number"
+          name="bill"
+          id="bill"
+          min="0"
+          step="0.01"
+          required
+        />
+        <!-- `disabled` and `required` modify accseibility of the button and behavior of the input -->
+        <br />
+        <label><input type="radio" name="tip" value="0.05" checked />5%</label>
+        <label><input type="radio" name="tip" value="0.1" />10%</label>
+        <label><input type="radio" name="tip" value="0.15" />15%</label>
+        <label><input type="radio" name="tip" value="0.2" />20%</label>
+        <br />
+        <button type="submit" id="calculate-tip-btn">Calculate</button>
+      </form>
+      <h3>Total</h3>
+      <div class="well" id="tip-result"></div>
+    </div>
+  </body>
+</html>
