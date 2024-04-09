@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  /**
+   * Asynchronously fetches stock information for a given symbol from the Alpha Vantage API.
+   *
+   * @param {string} symbol - The stock symbol for which to fetch information.
+   * @returns {Promise<Object>} A promise that resolves to an object containing stock information.
+   */
   const fetchStockInfo = async (symbol) => {
     symbol = symbol.toUpperCase();
 
@@ -22,6 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return { symbol, open, high, low, price, volume, change };
   };
 
+  /**
+   * Renders a stock card on the webpage using the provided stock data.
+   *
+   * @param {Object} stock - The stock data to be displayed on the stock card.
+   */
   const renderStockCard = (stock) => {
     const ticker_field = document.getElementById("ticker-symbol");
     const price_field = document.getElementById("stock-price");
@@ -67,6 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  /**
+   * Adds an event listener to the "search" button to initiate the fetching and rendering
+   * process for the entered stock symbol's information.
+   */
   document.getElementById("search-btn").addEventListener("click", () => {
     const symbolInput = document.getElementById("symbol-in").value;
     if (symbolInput) {
