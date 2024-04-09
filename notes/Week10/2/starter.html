@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fetch | Async | Await</title>
+    <!-- Today we are going to hit 2 different API endpoints and dynamically insert HTML -->
+    <!-- Rick and Morty Character Stats, change characer index to select (random) -->
+    <!-- https://rickandmortyapi.com/api/character/1 -->
+    <!-- Random Quote API Endpoint -->
+    <!-- https://quote-garden.onrender.com/api/v3/quotes/random -->
+    <!--
+    We will need to look at adding callback functions when our async functions complete
+    with .then()  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then
+    -->
+    <!-- We will format our messages using template literals
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals 
+    -->
+    <!-- Write our first arrow function
+      https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+    -->
+    <!-- Desctructuring Objects
+      https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+    -->
+
+    <script type="text/javascript">
+      // Our handle random number within a range util from week08
+      function randNumRange(min, max) {
+        var rn = Math.round(Math.random() * (max - min) + min);
+        // return a value from our function
+        return rn;
+      }
+
+      // flag the function as async, without this we cannot use await within
+      async function logApiResults() {
+        // generate a random number within our know character range
+        const randomIndex = randNumRange(0, 110);
+        // tell JS to pause until this next line resolves
+        // we can use template strings/literals here to insert our random number into the url
+        const response = await fetch(
+          `https://rickandmortyapi.com/api/character/${randomIndex}`
+        );
+        // we also need to tell JS to pause here, since it is dependent on the previous line
+        // forgetting await here will just log a Promise
+        const result = await response.json();
+        // userful methods we have access to at this point:
+        // .json() - returns the result as JSON
+        // .ok = a boolean we can use to check !response.ok means we should throw an erorr or backup message
+        // .blob() - great for fetching an image file
+
+        // More template literals to spit out a human readble sentence
+        const message = `${result.name} is a ${result.species} from ${result.origin.name}, and they are ${result.status}`;
+        console.log(message);
+      }
+
+      // logApiResults();
+
+      async function fetchCharacterJSON() {
+        const randInd = randNumRange(0, 110);
+        const response = await fetch(
+          `https://rickandmortyapi.com/api/character/${randInd}`
+        );
+        const character = await response.json();
+
+        return character;
+      }
+
+      // This won't work because fetchCharacterJSON is asyn
+      // const character = fetchCharacterJSON();
+      // IMPORTANT: Must use a callback function
+      // fetchCharacterJSON().then((data) => {
+      //   console.log("SUCCESS", data);
+      // })
+
+      // These two functions are equivalent
+      // function renderCharacter(data) {}
+      const renderCharacter = (data) => {
+        const characterCard = document.getElementById("message");
+
+        // Object destructuring
+        // Keys must map to the same key names in `data`
+        const { name, species, origin, status } = data;
+        // Equivalent to this
+        // const name = data.name; ...
+
+        const mesg = `${name} is a ${species} from ${origin.name}, and they are ${status}`;
+        characterCard.append(mesg);
+      };
+
+      const renderCharacterCard = (data) => {
+        const cardElement = document.getElementById("card");
+
+        const headshot = `<img src="${data.image}"/>`;
+        cardElement.insertAdjacentHTML("afterbegin", headshot);
+
+        const title = document.getElementById("characterName");
+        title.append(data.name);
+
+        const charInfo = document.getElementById("charInfo");
+        const stats = `
+          <tr>
+            <th>Species</th>
+            <td>${data.species}</td>
+          </tr>
+          <tr>
+            <th>Origin</th>
+            <td>${data.origin.name}</td>
+          </tr>
+          <tr>
+            <th>Status</th>
+            <td>${data.status}</td>
+          </tr>
+        `;
+        charInfo.insertAdjacentHTML("beforeend", stats);
+      };
+
+      fetchCharacterJSON()
+        .then((data) => {
+          renderCharacterCard(data);
+          // renderCharacter(data);
+        })
+        // Catch any errors
+        .catch((err) => {
+          console.error("Error:", err);
+        });
+
+      // ******* NEXT EXERCISE ********
+      const fetchInspo = async (url) => {
+        const response = await fetch(url);
+        const data = (await response.json()).data[0];
+        const { quoteAuthor, quoteText } = data;
+
+        return { author: quoteAuthor, quote: quoteText };
+      };
+
+      const INSPO_URL =
+        "https://quote-garden.onrender.com/api/v3/quotes/random";
+
+      fetchInspo(INSPO_URL).then((quoteInfo) => {
+        const { author, quote } = quoteInfo;
+
+        // Use querySelector to select HTML elements in the document
+        // Returns first element on document that matches selector
+        // Selector: think CSS
+        document.querySelector("#inspo .fancy").innerHTML = quote;
+        document.querySelector("#inspo .plain").innerHTML = `- ${author}`;
+      });
+    </script>
+    <style type="text/css">
+      /* Some custom fonts from google */
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      #card {
+        width: 25rem;
+        margin: 0 auto;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        /* from Oribton font documentation */
+        font-family: "Orbitron", sans-serif;
+      }
+
+      #inspo {
+        font-family: "Rock Salt", cursive;
+        width: 50%;
+        margin: 0 auto;
+      }
+
+      table {
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+
+      tr {
+        border-bottom: 2px solid grey;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="card">
+      <!-- afterbegin -->
+      <h3 id="characterName"></h3>
+      <table id="charInfo"></table>
+      <!-- Add this for first function -->
+      <div id="message"></div>
+      <!-- beforeend -->
+    </div>
+
+    <div id="inspo">
+      <p class="fancy"></p>
+      <p class="plain"></p>
+    </div>
+  </body>
+</html>
