@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
+}
+
+body {
+  background-color: rgba(35, 34, 43, 0.704);
+  color: #dbd4d4;
+}
+
+h1 {
+  text-align: center;
+  padding: 0;
+  font-size: 80px;
+}
+
+form {
+  text-align: center;
+}
+
+.green {
+  color: rgb(23, 161, 55);
+}
+
+.red {
+  color: rgb(217, 20, 20);
+}
+
+#ticker-symbol {
+  font-size: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+#stock-price {
+  font-size: 50px;
+}
+
+#card {
+  background-color: #515157;
+  display: flex;
+  padding: 20px;
+  width: 25rem;
+  margin: 20px auto;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+#specs {
+  width: 60%;
+}
+
+#change {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+table#stock-specs th,
+table#stock-specs td {
+  text-align: left;
+  padding: 4px;
+}
+
+.material-symbols-outlined.large-icon {
+    font-size: 100px;
+}
